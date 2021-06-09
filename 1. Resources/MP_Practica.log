@@ -1,0 +1,20 @@
+﻿  Board.cpp
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(39,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(88,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(97,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(111,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(134,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(181,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(228,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(237,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(277,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(321,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(343,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(357,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(360,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(438,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(451,16): warning C4018: '<': signed/unsigned mismatch
+  Dictionary.cpp
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Dictionary.cpp(36,10): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  MP_Practica.vcxproj -> C:\Users\Guillem\Desktop\Segona entrega\2. Platforms\0. Windows Desktop\Program\MP_Practica.exe
