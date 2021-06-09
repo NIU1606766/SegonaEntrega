@@ -23,11 +23,27 @@ Button::~Button(){
 
 bool Button::update ( int mousePosX, int mousePosY, bool mouseIsPressed) 
 {
-	//TODO 4.1: Implementar la programació del update...
-    return false; //Això s'ha de modificar, ho deixem posat per tal que compili sense errors.
+	if (mouseIsPressed && mousePosX >= m_iPosX && mousePosY >= m_iPosY && mousePosX <= m_iPosX + m_iWidth && mousePosY <= m_iPosY + m_iHeight)
+    {
+        m_eCurrentState = PRESSED;
+        return true;
+    }
+    else
+    {
+        m_eCurrentState = NORMAL;
+        return false;
+    }
 }
 
-void Button::render () {
-    //TODO 4.2: Implementar la programació del render...
+void Button::render ()
+{
+    if (m_eCurrentState == PRESSED)
+    {
+        GraphicManager::getInstance()->drawSprite(m_eStatePressed, m_iPosX, m_iPosY);
+    }
+    else
+    {
+        GraphicManager::getInstance()->drawSprite(m_eStateNormal, m_iPosX, m_iPosY);
+    }
 }
 

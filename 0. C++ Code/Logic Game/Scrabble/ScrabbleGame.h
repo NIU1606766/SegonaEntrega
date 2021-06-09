@@ -10,7 +10,7 @@
 #define ScrabbleGame_hpp
 
 #include <stdio.h>
-
+#include "Button.h"
 
 class ScrabbleGame
 {
@@ -23,10 +23,7 @@ public:
     
 private:
 	
-	//TODO 4.3: Instanciar el botó send fent ús de la classe Button.
-	// - Eliminem el codi que hem fet per poder gestionar un botó i ara ho fem mitjançant la classe Button
-	// - Inicialitzar la instància de button en el constructor de ScrabbleGame.
-	// - Fer la crida del render i update de la instància en el updateAndRender(...).
+    Button m_send;
     bool m_buttonPressed;
     bool m_drawLetter;
 

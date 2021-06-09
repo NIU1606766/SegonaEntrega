@@ -13,7 +13,7 @@
 
 using std::string;
 
-ScrabbleGame::ScrabbleGame()
+ScrabbleGame::ScrabbleGame() : m_send(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTTON_SEND_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100)
 {
 	m_buttonPressed = false;
 	m_drawLetter = false;
@@ -25,17 +25,13 @@ ScrabbleGame::~ScrabbleGame(){
 
 void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStatus)
 {	
-	int btn_size_w = 139;
-	int btn_size_h = 100;
-	int btn_pos_x = SCREEN_SIZE_X*0.5 - btn_size_w*0.5;
-	int btn_pos_y = SCREEN_SIZE_Y - btn_size_h;
 	GraphicManager::getInstance()->drawSprite(IMAGE_BACKGROUND, 0, 0);
 	GraphicManager::getInstance()->drawSprite(IMAGE_BOARD, BOARD_POS_X, BOARD_POS_Y);
+
 	
-	
-	if (mouseStatus && mousePosX >= btn_pos_x && mousePosY>=btn_pos_y && mousePosX<=btn_pos_x+btn_size_w && mousePosY <= btn_pos_y + btn_size_h)
+	bool pressed = m_send.update(mousePosX, mousePosY, mouseStatus);
+	if (pressed)
 	{
-		GraphicManager::getInstance()->drawSprite(IMAGE_BUTTON_SEND_PRESSED, btn_pos_x, btn_pos_y);
 		int posX = BOARD_POS_X;
 		int posY = BOARD_POS_Y;
 		for (int i = 0; i < BOARD_COLS_AND_ROWS; i++)
@@ -49,10 +45,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 			posX = BOARD_POS_X;
 		}
 	}
-	else
-	{
-		GraphicManager::getInstance()->drawSprite(IMAGE_BUTTON_SEND_NORMAL, btn_pos_x, btn_pos_y);
-	}
+	m_send.render();
 	string msg = "PosX: " + to_string(mousePosX) + ", PosY: " + to_string(mousePosY);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 10, 10, 0.6, msg);
     
