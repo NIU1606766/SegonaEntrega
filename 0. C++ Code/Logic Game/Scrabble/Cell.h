@@ -29,7 +29,7 @@ public:
     void setScoreEffect(ScoreEffect scoreEffect) { m_scoreEffect = scoreEffect; }
     void setTile(Tile tile) { m_tile = tile; }
     void setEmpty(bool empty) { m_empty = empty; }
-    void setTilePlayed(bool tilePlayed) { m_tilePlayed; }
+    void setTilePlayed(bool tilePlayed) { m_tilePlayed = tilePlayed; }
 
 private:
     ScoreEffect m_scoreEffect;

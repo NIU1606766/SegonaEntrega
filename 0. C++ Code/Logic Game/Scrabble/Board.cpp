@@ -86,7 +86,7 @@ bool Board::aligned()
 	int i;
 	for (i = 0; i < m_currentWord.size(); i++)
 	{
-		if (m_currentWord[i].getRow() != m_currentWord[1].getRow()) //comprovem que totes les cel·les estiguin a la mateixa fila
+		if (m_currentWord[i].getRow() != m_currentWord[0].getRow()) //comprovem que totes les cel·les estiguin a la mateixa fila
 		{
 			m_horizontal = false;
 		}
@@ -105,8 +105,8 @@ bool Board::aligned()
 
 	if (m_horizontal == true)
 	{
-		m_min = m_currentWord[1].getCol();
-		m_max = m_currentWord[1].getCol();
+		m_min = m_currentWord[0].getCol();
+		m_max = m_currentWord[0].getCol();
 		for (i = 0; i < m_currentWord.size(); i++)
 		{
 			if (m_currentWord[i].getCol() < m_min) //seleccionem la primera casella de la paraula
@@ -354,9 +354,11 @@ bool Board::wordsInDictionary()
 int Board::score()
 {
 	int i, j, p = 0, letterScore, wordScore;
-	bool dw = false, tw = false;
+	bool dw, tw;
 	for (i = 0; i < m_currentWords.size(); i++)
 	{
+		dw = false;
+		tw = false;
 		wordScore = 0; //inicialitzem la puntuació de la paraula a 0
 		for (j = 0; j < m_currentWords[i].size(); j++)
 		{
@@ -428,7 +430,7 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 			return INVALID_WORDS_NOT_IN_DICTIONARY; //hi ha paraules que no estan al diccionari
 		}
 	}
-	points += score(); //sumem els punts d'aquest torn
+	points = score(); //sumem els punts d'aquest torn
 
 	return ALL_CORRECT; //ha passat totes les comprovacions correctament
 }
