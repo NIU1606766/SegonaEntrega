@@ -21,8 +21,8 @@ Button::~Button(){
 }
 
 
-bool Button::update ( int mousePosX, int mousePosY, bool mouseIsPressed) {
-
+bool Button::update ( int mousePosX, int mousePosY, bool mouseIsPressed) 
+{
 	//TODO 4.1: Implementar la programació del update...
     return false; //Això s'ha de modificar, ho deixem posat per tal que compili sense errors.
 }

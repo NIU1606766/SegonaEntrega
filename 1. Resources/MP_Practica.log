@@ -1,20 +1,11 @@
-﻿  Board.cpp
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(39,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(88,16): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(97,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(111,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(134,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(181,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(228,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(237,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(277,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(321,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(343,16): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(357,16): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(360,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(438,16): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Board.cpp(451,16): warning C4018: '<': signed/unsigned mismatch
-  Dictionary.cpp
-C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\Dictionary.cpp(36,10): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  ScrabbleGame.cpp
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble_Defs.h(27,45): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(30,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(38,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(38,72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(45,75): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(45,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(54,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(54,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Guillem\Desktop\Segona entrega\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp(57,73): warning C4305: 'argument': truncation from 'double' to 'float'
   MP_Practica.vcxproj -> C:\Users\Guillem\Desktop\Segona entrega\2. Platforms\0. Windows Desktop\Program\MP_Practica.exe

@@ -27,7 +27,8 @@ private:
 	// - Eliminem el codi que hem fet per poder gestionar un botó i ara ho fem mitjançant la classe Button
 	// - Inicialitzar la instància de button en el constructor de ScrabbleGame.
 	// - Fer la crida del render i update de la instància en el updateAndRender(...).
-
+    bool m_buttonPressed;
+    bool m_drawLetter;
 
 };
 
