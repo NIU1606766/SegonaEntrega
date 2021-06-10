@@ -60,6 +60,8 @@ public:
     void sendCurrentWordToBoard();
     void removeCurrentWord();
     
+    //Mètodes de la part gràfica
+    void render();
         
 private:
     Cell m_cells[BOARD_COLS_AND_ROWS][BOARD_COLS_AND_ROWS];
@@ -83,6 +85,7 @@ private:
     bool wordInDictionary();
     bool wordsInDictionary();
     int score();
+
 };
 
 #endif /* Board_hpp */

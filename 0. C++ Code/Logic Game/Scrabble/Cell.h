@@ -31,6 +31,9 @@ public:
     void setEmpty(bool empty) { m_empty = empty; }
     void setTilePlayed(bool tilePlayed) { m_tilePlayed = tilePlayed; }
 
+    // Graphics methods
+    void render(int posX, int posY);
+
 private:
     ScoreEffect m_scoreEffect;
     Tile m_tile;

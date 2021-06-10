@@ -4,13 +4,18 @@
 //
 
 #include "Board.h"
+#include "../Scrabble_Defs.h"
+
 #include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <vector>
+
 using namespace std;
 
 const string fitxerConfig = "data/Configuration/board.txt";
+
+
 Board::Board()
 {
 	ifstream fitxer;
@@ -461,4 +466,21 @@ void Board::removeCurrentWord()
 	m_currentWords.clear();
 	m_horizontalConnections.clear();
 	m_verticalConnections.clear();
+}
+
+void Board::render()
+{
+	int posX = BOARD_POS_X;
+	int posY = BOARD_POS_Y;
+
+	for (int i = 0; i < BOARD_COLS_AND_ROWS; i++)
+	{
+		for (int j = 0; j < BOARD_COLS_AND_ROWS; j++)
+		{
+			m_cells[i][j].render(posX, posY);
+			posX += BOARD_TILE_SIZE;
+		}
+		posY += BOARD_TILE_SIZE;
+		posX = BOARD_POS_X;
+	}
 }

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "Button.h"
 
+
 class ScrabbleGame
 {
 public:
@@ -26,7 +27,6 @@ private:
     Button m_send;
     bool m_buttonPressed;
     bool m_drawLetter;
-
 };
 
 #endif /* ScrabbleGame_hpp */

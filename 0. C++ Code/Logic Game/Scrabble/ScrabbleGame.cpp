@@ -48,5 +48,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	m_send.render();
 	string msg = "PosX: " + to_string(mousePosX) + ", PosY: " + to_string(mousePosY);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 10, 10, 0.6, msg);
+
+
     
 }
