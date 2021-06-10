@@ -7,7 +7,7 @@
 #ifndef Board_hpp
 #define Board_hpp
 
-#include "Scrabble.h"
+#include "../Scrabble_Defs.h"
 #include <stdio.h>
 #include <string>
 

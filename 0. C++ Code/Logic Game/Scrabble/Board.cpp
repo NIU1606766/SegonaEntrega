@@ -4,6 +4,7 @@
 //
 
 #include "Board.h"
+#include "../GraphicManager.h"
 #include "../Scrabble_Defs.h"
 
 #include <algorithm>
@@ -470,6 +471,7 @@ void Board::removeCurrentWord()
 
 void Board::render()
 {
+	GraphicManager::getInstance()->drawSprite(IMAGE_BOARD, BOARD_POS_X, BOARD_POS_Y);
 	int posX = BOARD_POS_X;
 	int posY = BOARD_POS_Y;
 

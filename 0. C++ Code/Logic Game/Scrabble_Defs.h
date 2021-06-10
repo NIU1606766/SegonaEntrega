@@ -6,8 +6,8 @@
 //  Copyright © 2021 CompiledCreations. All rights reserved.
 //
 
-#ifndef Scrabble_h
-#define Scrabble_h
+#ifndef Scrabble_Defs_h
+#define Scrabble_Defs_h
 
 
 // Screen size (W,H)=(750,850)
@@ -28,4 +28,7 @@ const int BOARD_POS_X = SCREEN_SIZE_X * 0.5 - BOARD_SIZE * 0.5;
 const int BOARD_POS_Y = 40;
 
 
-#endif /* Scrabble_h */
+const int MAX_TILES = 7;
+const int NUM_PLAYERS = 3;
+
+#endif /* Scrabble_Defs_h */

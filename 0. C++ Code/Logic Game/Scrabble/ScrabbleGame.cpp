@@ -9,14 +9,12 @@
 #include "ScrabbleGame.h"
 #include "../Scrabble_Defs.h"
 
-#include "../GraphicManager.h"
-
 using std::string;
 
-ScrabbleGame::ScrabbleGame() : m_send(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTTON_SEND_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100)
+ScrabbleGame::ScrabbleGame() : m_buttonSend(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTTON_SEND_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100),
+							   m_buttonShuffle(IMAGE_BUTTON_SHUFFLE_NORMAL, IMAGE_BUTTON_SHUFFLE_PRESSED, 440, SCREEN_SIZE_Y - 100, 139, 100),
+							   m_buttonRecall(IMAGE_BUTTON_RECALL_NORMAL, IMAGE_BUTTON_RECALL_PRESSED, 200, SCREEN_SIZE_Y -100, 139, 100)
 {
-	m_buttonPressed = false;
-	m_drawLetter = false;
 }
 
 ScrabbleGame::~ScrabbleGame(){
@@ -26,10 +24,10 @@ ScrabbleGame::~ScrabbleGame(){
 void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStatus)
 {	
 	GraphicManager::getInstance()->drawSprite(IMAGE_BACKGROUND, 0, 0);
-	GraphicManager::getInstance()->drawSprite(IMAGE_BOARD, BOARD_POS_X, BOARD_POS_Y);
+	m_board.render();
 
 	
-	bool pressed = m_send.update(mousePosX, mousePosY, mouseStatus);
+	bool pressed = m_buttonSend.update(mousePosX, mousePosY, mouseStatus);
 	if (pressed)
 	{
 		int posX = BOARD_POS_X;
@@ -45,7 +43,9 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 			posX = BOARD_POS_X;
 		}
 	}
-	m_send.render();
+	m_buttonSend.render();
+	m_buttonShuffle.render();
+	m_buttonRecall.render();
 	string msg = "PosX: " + to_string(mousePosX) + ", PosY: " + to_string(mousePosY);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 10, 10, 0.6, msg);
 

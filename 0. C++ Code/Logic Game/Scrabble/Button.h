@@ -17,6 +17,7 @@ public:
         NONE
     } ButtonState;
 
+    Button() {}
     Button(IMAGE_NAME state_normal,
            IMAGE_NAME state_pressed,
            int posX, int posY,
