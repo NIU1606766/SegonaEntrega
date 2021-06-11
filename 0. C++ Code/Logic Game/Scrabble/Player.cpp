@@ -10,7 +10,7 @@ Player::Player(PlayerTile playerTiles[])
 	m_score = 0;
 }
 
-void Player::setPlayerTile(Tile& tile)
+void Player::setPlayerTile(Tile tile)
 {
 	bool trobat = false;
 

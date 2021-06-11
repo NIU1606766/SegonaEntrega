@@ -9,7 +9,7 @@ class PlayerTile
 public:
 	// Constructor i Deconstructor
 	PlayerTile();
-	PlayerTile(Tile& tile) { m_tile = tile; m_isEmpty = false; m_isOnBoard = false; }
+	PlayerTile(Tile& tile) { m_tile = tile; m_isEmpty = true; m_isOnBoard = false; }
 	~PlayerTile() {}
 
 	// Setters

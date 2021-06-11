@@ -13,8 +13,21 @@ using std::string;
 
 ScrabbleGame::ScrabbleGame() : m_buttonSend(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTTON_SEND_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100),
 							   m_buttonShuffle(IMAGE_BUTTON_SHUFFLE_NORMAL, IMAGE_BUTTON_SHUFFLE_PRESSED, 440, SCREEN_SIZE_Y - 100, 139, 100),
-							   m_buttonRecall(IMAGE_BUTTON_RECALL_NORMAL, IMAGE_BUTTON_RECALL_PRESSED, 200, SCREEN_SIZE_Y -100, 139, 100)
+							   m_buttonRecall(IMAGE_BUTTON_RECALL_NORMAL, IMAGE_BUTTON_RECALL_PRESSED, 200, SCREEN_SIZE_Y - 100, 139, 100),
+							   m_buttonPass(IMAGE_BUTTON_PASS_NORMAL, IMAGE_BUTTON_PASS_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100),
+							   m_board(),
+							   m_currentPlayer(0),
+							   m_lettersBag()
 {
+	for (int i = 0; i < NUM_PLAYERS; i++)
+	{
+		m_players[i].setPlayerScore(0);
+
+		for (int j = 0; j < MAX_TILES; j++)
+		{
+			m_players[i].setPlayerTile(m_lettersBag.getLetter());
+		}
+	}
 }
 
 ScrabbleGame::~ScrabbleGame(){

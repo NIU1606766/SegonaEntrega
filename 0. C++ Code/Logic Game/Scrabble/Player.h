@@ -16,8 +16,8 @@ public:
 	int getPlayerScore() const { return m_score; }
 	
 	// Setters
-	void setPlayerScore(int& score) { m_score = score; }
-	void setPlayerTile(Tile& tile);
+	void setPlayerScore(const int& score) { m_score = score; }
+	void setPlayerTile(Tile tile);
 
 private:
 	int m_score;

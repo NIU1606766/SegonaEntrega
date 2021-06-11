@@ -19,10 +19,13 @@ public:
 	~LettersBag() {}
 
 	// Getters and setters
-	Tile getLetter() const;
-	bool getEmpty() const {}
+	Tile getLetter();
+	bool getEmpty() const { return m_empty; }
+	void setEmpty(const bool& isEmpty) { m_empty = isEmpty; }
+
 private:
 	vector<Tile> m_letters;
+	bool m_empty;
 };
 
 

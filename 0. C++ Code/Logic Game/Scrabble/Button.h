@@ -25,7 +25,7 @@ public:
 
     ~Button();
 
-    bool update ( int mousePosX, int mousePosY, bool mouseIsPressed);
+    bool update (int mousePosX, int mousePosY, bool mouseIsPressed);
     void render ();
 
 private:

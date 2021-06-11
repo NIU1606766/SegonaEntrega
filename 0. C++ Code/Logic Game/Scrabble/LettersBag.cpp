@@ -5,8 +5,10 @@
 #include <algorithm>
 #include "LettersBag.h"
 
+
 LettersBag::LettersBag()
 {
+	m_empty = false;
 	const char* nomFitxer = "data/Configuration/lettersBag.txt";
 
 	ifstream fitxer;
@@ -16,15 +18,15 @@ LettersBag::LettersBag()
 	{
 		char lletra;
 		int score, n_Repeticions;
+		Tile tile;
 
 		fitxer >> lletra >> score >> n_Repeticions;
 
 		while (!fitxer.eof())
 		{
-			Tile tile;
 			tile.setLetter(lletra);
 			tile.setScore(score);
-			for (int i = 1; i < n_Repeticions; i++)
+			for (int i = 0; i < n_Repeticions; i++)
 			{
 				m_letters.push_back(tile);
 			}
@@ -35,11 +37,12 @@ LettersBag::LettersBag()
 	}
 }
 
-Tile LettersBag::getLetter() const
+
+Tile LettersBag::getLetter()
 {
-	srand(time(0));
-	int rnd = (rand() % m_letters.size()) + 1;
+	srand(time(NULL));
+	int rnd = (rand() % m_letters.size());
 	Tile tile = m_letters[rnd];
-	delete &m_letters[rnd];
+	m_letters.erase(m_letters.begin() + rnd);
 	return tile;
 }
