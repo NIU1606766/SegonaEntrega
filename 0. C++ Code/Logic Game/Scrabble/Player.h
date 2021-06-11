@@ -9,7 +9,7 @@ class Player
 {
 public:
 	// Constructors i Destructor
-	Player() { m_score = 0; }
+	Player() { m_score = 0; m_isDragging = false; }
 	~Player() {}
 
 	// Getters
@@ -28,6 +28,9 @@ public:
 private:
 	PlayerTile m_tiles[MAX_TILES];
 	int m_score;
+	int m_tileDragging;
+	bool m_isDragging;
+	bool m_allCorrect;
 };
 
 #endif /* Player_hpp */

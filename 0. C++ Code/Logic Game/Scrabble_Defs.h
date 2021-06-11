@@ -31,4 +31,7 @@ const int BOARD_POS_Y = 40;
 const int MAX_TILES = 7;
 const int NUM_PLAYERS = 3;
 
+const int PLAYER_TILE_POS_X = 4;
+const int PLAYER_TILE_POS_Y = 645;
+
 #endif /* Scrabble_Defs_h */

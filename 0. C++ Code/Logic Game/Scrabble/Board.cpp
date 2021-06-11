@@ -469,6 +469,11 @@ void Board::removeCurrentWord()
 	m_verticalConnections.clear();
 }
 
+Cell Board::getCell(int row, int col)
+{
+	return m_cells[col][row];
+}
+
 void Board::render()
 {
 	GraphicManager::getInstance()->drawSprite(IMAGE_BOARD, BOARD_POS_X, BOARD_POS_Y);

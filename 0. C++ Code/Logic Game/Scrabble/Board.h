@@ -59,6 +59,9 @@ public:
     CurrentWordResult checkCurrentWord(int& points);
     void sendCurrentWordToBoard();
     void removeCurrentWord();
+
+    //Getters
+    Cell getCell(int row, int col);
     
     //Mètodes de la part gràfica
     void render();

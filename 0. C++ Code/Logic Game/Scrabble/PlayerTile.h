@@ -19,8 +19,8 @@ public:
 	void setPos(float posX, float posY) { m_posX = posX; m_posY = posY; }
 	void setIsOnBoard(const bool& isOnBoard) { m_isOnBoard = isOnBoard; }
 	void setBoardPosition(BoardPosition& bp) { m_boardPosition = bp; }
-	void setIsMoving(const bool& isMoving) { m_isMoving = isMoving; }
-	void setSize(int size) { m_size = size; }
+	void setSizeSmall(const bool& small) { m_sizeSmall = small; }
+
 
 	// Getters
 	Tile getTile() { return m_tile; }
@@ -29,22 +29,19 @@ public:
 	float getPosY() const { return m_posY; }
 	bool getIsOnBoard() const { return m_isOnBoard; }
 	BoardPosition getBoardPosition() const { return m_boardPosition; }
-	bool getIsMoving() const { return m_isMoving; }
-	int getSize() const { return m_size; }
-
+	bool getSizeSmall() const { return m_sizeSmall; }
 	
 	const int bigTileSize = 100;
 	const int smallTileSize = 40;
 
 private:
-	int m_size;
 	Tile m_tile;
 	bool m_isEmpty;
 	float m_posX;
 	float m_posY;
 	bool m_isOnBoard;
-	bool m_isMoving;
 	BoardPosition m_boardPosition;
+	bool m_sizeSmall;
 };
 
 #endif /* PlayerTile_hpp */

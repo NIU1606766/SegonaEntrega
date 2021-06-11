@@ -38,7 +38,8 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 {	
 	GraphicManager::getInstance()->drawSprite(IMAGE_BACKGROUND, 0, 0);
 	m_board.render();
-	m_players[m_currentPlayer].update(mousePosX, mousePosY, mouseStatus);
+	m_players[m_currentPlayer].update(mousePosX, mousePosY, mouseStatus, m_board);
+	//m_players[m_currentPlayer].render(mousePosX, mousePosY, mouseStatus);
 	bool recall = m_buttonRecall.update(mousePosX, mousePosY, mouseStatus);
 	bool shuffle = m_buttonShuffle.update(mousePosX, mousePosY, mouseStatus);
 	bool send = m_buttonSend.update(mousePosX, mousePosY, mouseStatus);
