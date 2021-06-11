@@ -62,7 +62,7 @@ Board::Board()
 	}
 }
 
-PositionResult Board::setTile(Tile& tile, const BoardPosition& boardPos)
+PositionResult Board::setTile(Tile tile, const BoardPosition& boardPos)
 {
 	int row = boardPos.getRow();
 	int col = boardPos.getCol();

@@ -25,16 +25,25 @@ Button::~Button()
 
 bool Button::update (int mousePosX, int mousePosY, bool mouseIsPressed) 
 {
+    bool doAction = false;
 	if (mouseIsPressed && mousePosX >= m_iPosX && mousePosY >= m_iPosY && mousePosX <= m_iPosX + m_iWidth && mousePosY <= m_iPosY + m_iHeight)
     {
-        m_eCurrentState = PRESSED;
-        return true;
+        if (mouseIsPressed && m_eCurrentState == NORMAL)
+        {
+            m_eCurrentState = PRESSED; // Hem entrat amb el mouse apretant i per tant no cal fer res.
+        }
+        else if (!mouseIsPressed && m_eCurrentState == PRESSED)
+        {
+            doAction = true;
+            m_eCurrentState = NORMAL;
+        }
     }
     else
     {
         m_eCurrentState = NORMAL;
-        return false;
     }
+
+    return doAction;
 }
 
 void Button::render ()

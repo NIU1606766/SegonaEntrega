@@ -3,13 +3,13 @@
 
 #include "../Scrabble_Defs.h"
 #include "PlayerTile.h"
+#include "Board.h"
 
 class Player
 {
 public:
 	// Constructors i Destructor
 	Player() { m_score = 0; }
-	Player(PlayerTile playerTiles[]);
 	~Player() {}
 
 	// Getters
@@ -19,9 +19,15 @@ public:
 	void setPlayerScore(const int& score) { m_score = score; }
 	void setPlayerTile(Tile tile);
 
+	// Update
+	void update(int mousePosX, int mousePosY, bool mouseStatus, Board& board);
+
+	// Render
+	void render(int mousePosX, int mousePosY, bool mouseStatus);
+
 private:
-	int m_score;
 	PlayerTile m_tiles[MAX_TILES];
+	int m_score;
 };
 
 #endif /* Player_hpp */

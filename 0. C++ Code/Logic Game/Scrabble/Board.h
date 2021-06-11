@@ -55,7 +55,7 @@ class Board
 {
 public:
     Board();
-    PositionResult setTile(Tile &tile, const BoardPosition& boardPos);
+    PositionResult setTile(Tile tile, const BoardPosition& boardPos);
     CurrentWordResult checkCurrentWord(int& points);
     void sendCurrentWordToBoard();
     void removeCurrentWord();
