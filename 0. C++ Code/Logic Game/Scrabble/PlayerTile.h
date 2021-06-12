@@ -3,6 +3,7 @@
 
 #include "Tile.h"
 #include "BoardPosition.h"
+#include "../GraphicManager.h"
 
 class PlayerTile
 {
@@ -19,7 +20,7 @@ public:
 	void setPos(float posX, float posY) { m_posX = posX; m_posY = posY; }
 	void setIsOnBoard(const bool& isOnBoard) { m_isOnBoard = isOnBoard; }
 	void setBoardPosition(BoardPosition& bp) { m_boardPosition = bp; }
-	void setSizeSmall(const bool& small) { m_sizeSmall = small; }
+	void setSizeSmall(const bool& isSmall) { m_sizeSmall = isSmall; }
 
 
 	// Getters
@@ -31,6 +32,15 @@ public:
 	BoardPosition getBoardPosition() const { return m_boardPosition; }
 	bool getSizeSmall() const { return m_sizeSmall; }
 	
+
+	//Mètodes de la part gràfica
+	void printLetter();
+	
+	IMAGE_NAME imageBig(char letter);
+	IMAGE_NAME imageSmall(char letter);
+
+	PlayerTile operator=(const PlayerTile& pt);
+
 	const int bigTileSize = 100;
 	const int smallTileSize = 40;
 
