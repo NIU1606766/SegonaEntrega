@@ -1,24 +1,8 @@
 #include "Player.h"
 #include "../GraphicManager.h"
 #include <iostream>
+#include <stdlib.h>
 
-
-void Player::setPlayerTile(Tile tile)
-{
-	bool trobat = false;
-
-	for (int i = 0; i < MAX_TILES && !trobat; i++)
-	{
-		if (m_tiles[i].getIsEmpty() == true)
-		{
-			m_tiles[i].setTile(tile);
-			m_tiles[i].setIsEmpty(false);
-			m_tiles[i].setIsOnBoard(false);
-			m_tiles[i].setSizeSmall(false);
-			trobat = true;
-		}
-	}
-}
 void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board)
 {
 
@@ -54,7 +38,7 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 	for (int i = 0; i < MAX_TILES; i++) 
 	{
 		m_tiles[i].printLetter();
-		j = j + 105;
+		j += 105;
 	}
 
 	//IF ARRASTRANT
@@ -80,22 +64,23 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 
 				if (m_tiles[m_tileDragging].getIsOnBoard()) {  //borro paraula i torno a fer tots els set tiles per a que no es dupliqui un setTile
 					board.removeCurrentWord();
-					for (int i = 0; i < m_vSetTiles.size(); i++) {
-						if (m_vSetTiles[i].first.getLetter() == m_tiles[m_tileDragging].getTile().getLetter()) {
+					for (int i = 0; i < m_setTiles.size(); i++) {
+						if (m_setTiles[i].first.getLetter() == m_tiles[m_tileDragging].getTile().getLetter()) {
 							result = board.setTile(m_tiles[m_tileDragging].getTile(), boardPos);
 
 							m_tiles[m_tileDragging].setIsOnBoard(true);
+							std::cout << "Tile now on board." << std::endl;
 							m_tiles[m_tileDragging].setSizeSmall(true);
 						}
 						else {
-							result = board.setTile(m_vSetTiles[i].first, m_vSetTiles[i].second);
+							result = board.setTile(m_setTiles[i].first, m_setTiles[i].second);
 
 						}
 					}
 				}
 				else {
 					result = board.setTile(m_tiles[m_tileDragging].getTile(), boardPos); //comprovem si la paraula es correcte amb el setTile
-					m_vSetTiles.push_back(make_pair(m_tiles[m_tileDragging].getTile(), boardPos));
+					m_setTiles.push_back(make_pair(m_tiles[m_tileDragging].getTile(), boardPos));
 					m_tiles[m_tileDragging].setIsOnBoard(true);
 					m_tiles[m_tileDragging].setSizeSmall(true);
 				}
@@ -111,13 +96,16 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 				m_tiles[m_tileDragging].setSizeSmall(false);
 				m_tiles[m_tileDragging].setIsOnBoard(false); //isOnBoard = false --> pickupFromBoard()
 				m_allCorrect = false;
+				std::cout << "INVALID POSITION" << std::endl;
 				break;
 			case NOT_EMPTY:
 				m_tiles[m_tileDragging].setSizeSmall(false);
+				std::cout << "NOT EMPTY CELL" << std::endl;
 				break;
 			case VALID_POSITION:
 				m_tiles[m_tileDragging].setSizeSmall(true);
 				m_tiles[m_tileDragging].setIsOnBoard(true); //isOnBoard = true --> leaveOnBoard()
+				std::cout << "VALID POSITION" << std::endl;
 				break;
 			default:
 				break;
@@ -128,292 +116,253 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 
 void Player::render(int mousePosX, int mousePosY, bool mouseStatus)
 {
-	/*
-	int posX = 4;
-	int posY = 645;
-	
-	for (int i = 0; i < MAX_TILES; i++)
-	{
-		if (m_tiles[i].getIsMoving() == false && m_tiles[i].getIsEmpty() == false && m_tiles[i].getIsOnBoard() == false)
-		{
-			switch (m_tiles[i].getTile().getLetter())
-			{
-				case 'a':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_A_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'b':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_B_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'c':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_C_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'd':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_D_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'e':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_E_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'f':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_F_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'g':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_G_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'h':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_H_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'i':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_I_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'j':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_J_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'k':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_K_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'l':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_L_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'm':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_M_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'n':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_N_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'o':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_O_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'p':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_P_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'q':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_Q_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'r':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_R_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 's':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_S_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 't':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_T_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'u':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_U_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'v':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_V_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'w':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_W_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'x':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_X_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'y':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_Y_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				case 'z':
-					GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_Z_BIG, posX, posY);
-					m_tiles[i].setPos(posX, posY);
-					break;
-
-				default:
-					break;
-			}
-			posX += 107;
-		}
-
-		else if (m_tiles[i].getIsMoving() == true)
-		{
-			switch (m_tiles[i].getTile().getLetter())
-			{
-			case 'a':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_A_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'b':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_B_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'c':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_C_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'd':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_D_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'e':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_E_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'f':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_F_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'g':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_G_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'h':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_H_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'i':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_I_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'j':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_J_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'k':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_K_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'l':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_L_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'm':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_M_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'n':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_N_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'o':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_O_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'p':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_P_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'q':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_Q_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'r':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_R_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 's':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_S_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 't':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_T_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'u':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_U_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'v':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_V_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'w':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_W_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'x':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_X_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'y':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_Y_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			case 'z':
-				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_Z_SMALL, mousePosX, mousePosY);
-				m_tiles[i].setPos(mousePosX, mousePosY);
-				break;
-
-			default:
-				break;
-		}
-		}
-	}
-	*/
 	
 }
 
+void Player::addTiles(LettersBag& lb)
+{
+	//FALTA PRINTAR LA NOVA LLETRA EN AQUEST MÈTODE?
+
+		for (int i = 0; i < MAX_TILES; i++) {
+			if (m_tiles[i].getIsEmpty()) //la lletra ha estat jugada i validada per tant fa falta afegir una nova de la bag (o es el primer torn i totes les pos estan buides)
+			{
+				m_tiles[i].setTile(lb.getLetter()); //omplo la posició
+				m_tiles[i].setSizeSmall(false);
+				m_tiles[i].setIsEmpty(false); //dic que la posicio ja no esta buida
+			}
+		}
+}
+
+void Player::sendCurrentWordToBoard(Board& board)
+{
+	if (board.checkCurrentWord(m_score) == ALL_CORRECT) {
+		for (int i = 0; i < MAX_TILES; i++) { //comprovo si s'han tirat totes les fitxes (pendents de validar)
+			if (m_tiles[i].getIsOnBoard()) {
+				m_boardTiles.push_back(m_tiles[i].getTile()); //guardo la fitxa jugada per poder sobreescriure la posicio al atril al setTile
+
+
+				m_boardTilesPosition.push_back(make_pair(m_tiles[i].getPosX(), m_tiles[i].getPosY()));
+
+				m_tiles[i].setSizeSmall(false);
+				m_tiles[i].setPos(PLAYER_TILE_POS_X + i + 105 * i, PLAYER_TILE_POS_Y);
+				m_allCorrect = true;
+
+				m_tiles[i].setIsEmpty(true);
+				m_tiles[i].setIsOnBoard(false);
+
+			}
+
+		}
+		board.sendCurrentWordToBoard();
+		m_allCorrect = true;
+	}
+}
+
+bool Player::anyTileOnTheBoard()
+{
+	bool anyTile = false;
+
+	for (int i = 0; i < MAX_TILES; i++)
+	{
+		// Comprovo si hi ha alguna fitxa jugada a la board (pendent de validar)
+		if (m_tiles[i].getIsOnBoard())
+		{
+			anyTile = true;
+			m_allCorrect = false;
+		}
+	}
+
+	return anyTile;
+}
+
+bool Player::allTilesPlayed()
+{
+	bool allTiles = true;
+
+	for (int i = 0; i < MAX_TILES; i++)
+	{
+		// Comprovo si s'han tirat totes les fitxes (pendents de validar)
+		if (!m_tiles[i].getIsOnBoard())
+			allTiles = false;
+	}
+
+	return allTiles;
+}
+
+IMAGE_NAME Player::imageSmall2(char letter)
+{
+	switch (letter)
+	{
+	case 'a':
+		return IMAGE_LETTER_A_SMALL;
+		break;
+
+	case 'b':
+		return IMAGE_LETTER_B_SMALL;
+		break;
+
+	case 'c':
+		return IMAGE_LETTER_C_SMALL;
+		break;
+
+	case 'd':
+		return IMAGE_LETTER_D_SMALL;
+		break;
+
+	case 'e':
+		return IMAGE_LETTER_E_SMALL;
+		break;
+
+	case 'f':
+		return IMAGE_LETTER_F_SMALL;
+		break;
+
+	case 'g':
+		return IMAGE_LETTER_G_SMALL;
+		break;
+
+	case 'h':
+		return IMAGE_LETTER_H_SMALL;
+		break;
+
+	case 'i':
+		return IMAGE_LETTER_I_SMALL;
+		break;
+
+	case 'j':
+		return IMAGE_LETTER_J_SMALL;
+		break;
+
+	case 'k':
+		return IMAGE_LETTER_K_SMALL;
+		break;
+
+	case 'l':
+		return IMAGE_LETTER_L_SMALL;
+		break;
+
+	case 'm':
+		return IMAGE_LETTER_M_SMALL;
+		break;
+
+	case 'n':
+		return IMAGE_LETTER_N_SMALL;
+		break;
+
+	case 'o':
+		return IMAGE_LETTER_O_SMALL;
+		break;
+
+	case 'p':
+		return IMAGE_LETTER_P_SMALL;
+		break;
+
+	case 'q':
+		return IMAGE_LETTER_Q_SMALL;
+		break;
+
+	case 'r':
+		return IMAGE_LETTER_R_SMALL;
+		break;
+
+	case 's':
+		return IMAGE_LETTER_S_SMALL;
+		break;
+
+	case 't':
+		return IMAGE_LETTER_T_SMALL;
+		break;
+
+	case 'u':
+		return IMAGE_LETTER_U_SMALL;
+		break;
+
+	case 'v':
+		return IMAGE_LETTER_V_SMALL;
+		break;
+
+	case 'w':
+		return IMAGE_LETTER_W_SMALL;
+		break;
+
+	case 'x':
+		return IMAGE_LETTER_X_SMALL;
+		break;
+
+	case 'y':
+		return IMAGE_LETTER_Y_SMALL;
+		break;
+
+	case 'z':
+		return IMAGE_LETTER_Z_SMALL;
+		break;
+
+	default:
+		break;
+	}
+}
+
+void Player::checkBoard(Board& board)
+{
+	// Lletres del board
+
+	for (int i = 0; i < m_boardTiles.size(); i++)
+	{
+		IMAGE_NAME img = imageSmall2(m_boardTiles[i].getLetter());
+		float posX = m_boardTilesPosition[i].first;
+		float posY = m_boardTilesPosition[i].second;
+		GraphicManager::getInstance()->drawSprite((IMAGE_NAME)img, posX, posY);
+	}
+}
+
+void Player::recall()
+{
+	// Recorrer tota la matriu i recollir fitxes jugant-se actualment (tornar a pintar tot però sense les lletres jugant-se)
+	int posX = BOARD_POS_X;
+	int posY = BOARD_POS_Y;
+
+	for (int i = 0; i < MAX_TILES; i++)
+	{
+		if (m_tiles[i].getIsOnBoard())
+		{
+			m_tiles[i].setIsOnBoard(false);
+		}
+	}
+
+	for (int i = 0; i < m_setTiles.size(); i++)
+	{
+		m_setTiles.pop_back();
+	}
+}
+
+void Player::shuffle()
+{
+	PlayerTile aux;
+	std::cout << "ordre inicial: ";
+	for (int i = 0; i < MAX_TILES; i++) {
+		cout << m_tiles[i].getTile().getLetter() << "  ";
+	}
+	std::cout << std::endl;
+
+	for (int i = 0; i < MAX_TILES; i++) {
+
+		int pos = rand() % MAX_TILES;
+
+		while (!m_tiles[pos].getIsOnBoard() && m_tiles[pos].getPosY() == PLAYER_TILE_POS_Y && pos == i)
+			pos = rand() % MAX_TILES;
+
+		if (!m_tiles[i].getIsOnBoard() && m_tiles[i].getPosY() == PLAYER_TILE_POS_Y)
+		{
+			aux = m_tiles[i];
+			m_tiles[i] = m_tiles[pos];
+			m_tiles[pos] = aux;
+		}
+	}
+
+	std::cout << "ordre barrejat: ";
+	for (int i = 0; i < MAX_TILES; i++) {
+		std::cout << m_tiles[i].getTile().getLetter() << "  ";
+	}
+	std::cout << std::endl;
+
+}

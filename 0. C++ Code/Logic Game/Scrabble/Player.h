@@ -3,6 +3,7 @@
 
 #include "../Scrabble_Defs.h"
 #include "PlayerTile.h"
+#include "LettersBag.h"
 #include "Board.h"
 
 class Player
@@ -17,7 +18,6 @@ public:
 	
 	// Setters
 	void setPlayerScore(const int& score) { m_score = score; }
-	void setPlayerTile(Tile tile);
 
 	// Update
 	void update(int mousePosX, int mousePosY, bool mouseStatus, Board& board);
@@ -25,12 +25,27 @@ public:
 	// Render
 	void render(int mousePosX, int mousePosY, bool mouseStatus);
 
+	
+	void addTiles(LettersBag& lb);
+	void sendCurrentWordToBoard(Board& board);
+	bool anyTileOnTheBoard();
+	bool allTilesPlayed();
+	IMAGE_NAME imageSmall2(char letter);
+	void checkBoard(Board& board);
+	void recall();
+	void shuffle();
+
+
 private:
 	PlayerTile m_tiles[MAX_TILES];
 	int m_score;
 	int m_tileDragging;
 	bool m_isDragging;
 	bool m_allCorrect;
+
+	vector <pair<float, float>> m_boardTilesPosition;
+	vector <Tile> m_boardTiles;
+	vector <pair<Tile, BoardPosition>> m_setTiles;
 };
 
 #endif /* Player_hpp */
