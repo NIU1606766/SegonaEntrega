@@ -19,7 +19,7 @@ public:
 	void setPos(float posX, float posY) { m_posX = posX; m_posY = posY; }
 	void setIsOnBoard(const bool& isOnBoard) { m_isOnBoard = isOnBoard; }
 	void setBoardPosition(BoardPosition& bp) { m_boardPosition = bp; }
-	void setSizeSmall(const bool& small) { m_sizeSmall = small; }
+	void setSizeSmall(const bool& size) { m_sizeSmall = size; }
 
 
 	// Getters

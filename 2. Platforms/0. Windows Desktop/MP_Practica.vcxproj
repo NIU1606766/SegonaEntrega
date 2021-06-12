@@ -166,6 +166,9 @@
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\Button.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\Cell.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\Dictionary.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\LettersBag.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\Player.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\PlayerTile.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\Tile.cpp" />
   </ItemGroup>
@@ -190,6 +193,9 @@
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Button.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Cell.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Dictionary.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\LettersBag.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Player.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\PlayerTile.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Scrabble.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\ScrabbleGame.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Tile.h" />

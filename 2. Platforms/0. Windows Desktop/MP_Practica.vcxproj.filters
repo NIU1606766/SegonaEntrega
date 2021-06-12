@@ -55,6 +55,15 @@
     <ClCompile Include="..\..\0. C++ Code\Logic Game\GraphicManager.cpp">
       <Filter>Logic Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\LettersBag.cpp">
+      <Filter>Logic Game\Scrabble</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\Player.cpp">
+      <Filter>Logic Game\Scrabble</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Scrabble\PlayerTile.cpp">
+      <Filter>Logic Game\Scrabble</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Board.h">
@@ -128,6 +137,15 @@
     </ClInclude>
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble_Defs.h">
       <Filter>Logic Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\LettersBag.h">
+      <Filter>Logic Game\Scrabble</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\Player.h">
+      <Filter>Logic Game\Scrabble</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Scrabble\PlayerTile.h">
+      <Filter>Logic Game\Scrabble</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
