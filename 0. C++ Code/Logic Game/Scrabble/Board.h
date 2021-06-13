@@ -56,10 +56,10 @@ class Board
 public:
     Board();
     PositionResult setTile(Tile tile, const BoardPosition& boardPos);
+    void removeTile(const BoardPosition& boardPos);
     CurrentWordResult checkCurrentWord(int& points);
     void sendCurrentWordToBoard();
     void removeCurrentWord();
-
     //Getters
     Cell getCell(int row, int col);
     

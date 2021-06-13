@@ -406,6 +406,9 @@ int Board::score()
 
 CurrentWordResult Board::checkCurrentWord(int& points)
 {
+	m_currentWords.clear(); // s'omple a wordsInDictionary
+	m_horizontalConnections.clear(); // s'omple a connection()
+	m_verticalConnections.clear();
 	if (aligned() == false)
 	{
 		return INVALID_NOT_ALIGNED; //no estan alineades o consecutives
@@ -449,9 +452,21 @@ void Board::sendCurrentWordToBoard()
 		m_cells[m_currentWord[i].getRow()][m_currentWord[i].getCol()].setTilePlayed(true); //marquem les caselles d'aquest torn com a vàlides
 	}
 	m_currentWord.clear(); //resetegem tots els paràmetres d'aquest torn
-	m_currentWords.clear();
-	m_horizontalConnections.clear();
-	m_verticalConnections.clear();
+}
+
+void Board::removeTile(const BoardPosition& boardPos)
+{
+	int i;
+	Tile nullTile;
+	m_cells[boardPos.getRow()][boardPos.getCol()].setEmpty(true); //marquem les caselles d'aquest torn com a buides
+	m_cells[boardPos.getRow()][boardPos.getCol()].setTile(nullTile); //posem una fitxa nul·la a la casella
+	//m_currentWord.erase(remove(m_currentWord.begin(), m_currentWord.end(), boardPos), m_currentWord.end());
+	for (i = 0; i < m_currentWord.size(); i++) {
+		if (m_currentWord[i] == boardPos) {
+			m_currentWord.erase(m_currentWord.begin() + i);
+			break;
+		}
+	}
 }
 
 void Board::removeCurrentWord()

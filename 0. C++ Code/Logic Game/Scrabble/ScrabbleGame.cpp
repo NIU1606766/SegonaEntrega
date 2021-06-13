@@ -44,8 +44,8 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	m_board.render();
 	m_players[m_currentPlayer].update(mousePosX, mousePosY, mouseStatus, m_board);
 
-	if (m_players[m_currentPlayer].anyTileOnTheBoard())
-		m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
+	//if (m_players[m_currentPlayer].anyTileOnTheBoard())
+	//	m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
 
 	m_players[m_currentPlayer].checkBoard(m_board);
 
@@ -56,7 +56,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	recall = m_buttonRecall.update(mousePosX, mousePosY, mouseStatus);
 	pass = m_buttonPass.update(mousePosX, mousePosY, mouseStatus);
 
-	if (send)
+	if (send && m_players[m_currentPlayer].anyTileOnTheBoard())
 	{
 		m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
 	}

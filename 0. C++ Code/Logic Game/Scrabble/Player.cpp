@@ -5,15 +5,25 @@
 
 void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board)
 {
-
+	float cellSize = (BOARD_SIZE / BOARD_COLS_AND_ROWS);
 	// Comprovar si vol arrastrar fitxa
 	for (int i = 0; i < MAX_TILES; i++)
 	{
-		if ((mousePosX >= m_tiles[i].getPosX() && mousePosX <= m_tiles[i].getPosX() + 100) && 
-			(mousePosY >= m_tiles[i].getPosY() && mousePosY <= m_tiles[i].getPosY() + 100) && 
+		float cellSize_i = cellSize;
+		if (!m_tiles[i].getIsOnBoard()) {
+			cellSize_i = 100;
+		}
+		if ((mousePosX >= m_tiles[i].getPosX() && mousePosX <= m_tiles[i].getPosX() + cellSize_i) &&
+			(mousePosY >= m_tiles[i].getPosY() && mousePosY <= m_tiles[i].getPosY() + cellSize_i) &&
 			mouseStatus && !m_isDragging)
 		{
 			m_tiles[i].setSizeSmall(true);
+			if (m_tiles[i].getIsOnBoard()) {
+
+				std::cout << "traient de la posicio vella" << std::endl;
+				board.removeTile(m_tiles[i].getBoardPosition()); //el traiem de la posició vella
+				m_tiles[i].setIsOnBoard(false);
+			}
 			m_isDragging = true;
 			m_tileDragging = i;
 		}
@@ -48,11 +58,10 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 		{
 			m_isDragging = false;
 			PositionResult result;
-			float cellSize = (BOARD_SIZE / BOARD_COLS_AND_ROWS);
 			int col = int((mousePosX - BOARD_POS_X) / cellSize);
 			int row = int((mousePosY - BOARD_POS_Y) / cellSize);
 			BoardPosition boardPos(col, row);
-			int colDef, rowDef;
+			//int colDef, rowDef;
 			if (mousePosX < BOARD_POS_X || mousePosX > BOARD_POS_X + BOARD_SIZE ||
 				mousePosY < BOARD_POS_Y || mousePosY > BOARD_POS_Y + BOARD_SIZE || !board.getCell(row, col).getEmpty()) 
 			{ 
@@ -61,35 +70,15 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 				m_tiles[m_tileDragging].setIsOnBoard(false);
 			}
 			else {
-
-				if (m_tiles[m_tileDragging].getIsOnBoard()) {  //borro paraula i torno a fer tots els set tiles per a que no es dupliqui un setTile
-					board.removeCurrentWord();
-					for (int i = 0; i < m_setTiles.size(); i++) {
-						if (m_setTiles[i].first.getLetter() == m_tiles[m_tileDragging].getTile().getLetter()) {
-							result = board.setTile(m_tiles[m_tileDragging].getTile(), boardPos);
-
-							m_tiles[m_tileDragging].setIsOnBoard(true);
-							std::cout << "Tile now on board." << std::endl;
-							m_tiles[m_tileDragging].setSizeSmall(true);
-						}
-						else {
-							result = board.setTile(m_setTiles[i].first, m_setTiles[i].second);
-
-						}
-					}
-				}
-				else {
-					result = board.setTile(m_tiles[m_tileDragging].getTile(), boardPos); //comprovem si la paraula es correcte amb el setTile
-					m_setTiles.push_back(make_pair(m_tiles[m_tileDragging].getTile(), boardPos));
-					m_tiles[m_tileDragging].setIsOnBoard(true);
-					m_tiles[m_tileDragging].setSizeSmall(true);
-				}
-
+				result = board.setTile(m_tiles[m_tileDragging].getTile(), boardPos); //intenta posar la lletra al tauler
+				m_tiles[m_tileDragging].setBoardPosition(boardPos);
 				cout << "PARAULA SETTILE: " << m_tiles[m_tileDragging].getTile().getLetter() << endl;
 
-				float posY = boardPos.getRow() * cellSize + BOARD_POS_Y;
-				float posX = boardPos.getCol() * cellSize + BOARD_POS_X;
-				m_tiles[m_tileDragging].setPos(posX, posY);
+				if (result == VALID_POSITION) {
+					float posY = boardPos.getRow() * cellSize + BOARD_POS_Y;
+					float posX = boardPos.getCol() * cellSize + BOARD_POS_X;
+					m_tiles[m_tileDragging].setPos(posX, posY);
+				}
 			}
 			switch (result) {
 			case INVALID_POSITION:
@@ -100,6 +89,7 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 				break;
 			case NOT_EMPTY:
 				m_tiles[m_tileDragging].setSizeSmall(false);
+				m_tiles[m_tileDragging].setIsOnBoard(false);
 				std::cout << "NOT EMPTY CELL" << std::endl;
 				break;
 			case VALID_POSITION:
