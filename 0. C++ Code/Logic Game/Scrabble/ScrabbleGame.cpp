@@ -79,6 +79,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	if(recall)
 	{
 		m_players[m_currentPlayer].recall();
+		m_board.removeCurrentWord();
 	}
 
 	if (pass)
