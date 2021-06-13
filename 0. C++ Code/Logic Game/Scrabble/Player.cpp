@@ -47,7 +47,9 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 	j = 0;
 	for (int i = 0; i < MAX_TILES; i++) 
 	{
-		m_tiles[i].printLetter();
+		if (!m_tiles[i].getIsEmpty()) {
+			m_tiles[i].printLetter();
+		}
 		j += 105;
 	}
 
@@ -128,13 +130,14 @@ bool Player::sendCurrentWordToBoard(Board& board)
 	if (board.checkCurrentWord(m_score) == ALL_CORRECT) {
 		for (int i = 0; i < MAX_TILES; i++) { //comprovo si s'han tirat totes les fitxes (pendents de validar)
 			if (m_tiles[i].getIsOnBoard()) {
-				m_boardTiles.push_back(m_tiles[i].getTile()); //guardo la fitxa jugada per poder sobreescriure la posicio al atril al setTile
+				//m_boardTiles.push_back(m_tiles[i].getTile()); //guardo la fitxa jugada per poder sobreescriure la posicio al atril al setTile
 
-				m_boardTilesPosition.push_back(make_pair(m_tiles[i].getPosX(), m_tiles[i].getPosY()));
+				//m_boardTilesPosition.push_back(make_pair(m_tiles[i].getPosX(), m_tiles[i].getPosY()));
 
+				// resetegem el playertile
 				m_tiles[i].setSizeSmall(false);
 				m_tiles[i].setPos(PLAYER_TILE_POS_X + i + 105 * i, PLAYER_TILE_POS_Y);
-				m_allCorrect = true;
+				//m_allCorrect = true;
 
 				m_tiles[i].setIsEmpty(true);
 				m_tiles[i].setIsOnBoard(false);
@@ -143,8 +146,8 @@ bool Player::sendCurrentWordToBoard(Board& board)
 
 		}
 		board.sendCurrentWordToBoard();
-		// to do: reomplir atril
 		m_allCorrect = true;
+
 		return true;
 	}
 	return false;

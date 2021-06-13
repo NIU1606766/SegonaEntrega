@@ -36,10 +36,10 @@ ScrabbleGame::~ScrabbleGame(){
 
 void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStatus)
 {	
-	bool send;
-	bool shuffle;
-	bool recall;
-	bool pass;
+	bool send = false;
+	bool shuffle = false;
+	bool recall = false;
+	bool pass = false;
 	GraphicManager::getInstance()->drawSprite(IMAGE_BACKGROUND, 0, 0);
 	m_board.render();
 	m_players[m_currentPlayer].update(mousePosX, mousePosY, mouseStatus, m_board);
@@ -51,18 +51,23 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 
 
 
-	send = m_buttonSend.update(mousePosX, mousePosY, mouseStatus);
+	if (m_players[m_currentPlayer].anyTileOnTheBoard()) {
+		send = m_buttonSend.update(mousePosX, mousePosY, mouseStatus);
+	} else {
+		pass = m_buttonPass.update(mousePosX, mousePosY, mouseStatus);
+	}
 	shuffle = m_buttonShuffle.update(mousePosX, mousePosY, mouseStatus);
 	recall = m_buttonRecall.update(mousePosX, mousePosY, mouseStatus);
-	pass = m_buttonPass.update(mousePosX, mousePosY, mouseStatus);
 
-	if (send && m_players[m_currentPlayer].anyTileOnTheBoard())
+	if (send)
 	{
 		bool result = m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
 		if (result) {
+			// agafem fitxes
+			m_players[m_currentPlayer].addTiles(m_lettersBag);
 			// passem de jugador
 			m_currentPlayer++;
-			if (m_currentPlayer > NUM_PLAYERS) m_currentPlayer = 0;
+			if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0;
 		}
 	}
 
@@ -78,19 +83,19 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 
 	if (pass)
 	{
-		if (m_currentPlayer == 0)
-			m_currentPlayer = 1;
-		
-		if (m_currentPlayer == 1)
-			m_currentPlayer = 2;
-
-		if (m_currentPlayer == 2)
-			m_currentPlayer = 0;
+		// passem de jugador
+		m_currentPlayer++;
+		if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0;
 	}
 
-	m_buttonSend.render();
 	m_buttonRecall.render();
 	m_buttonShuffle.render();
+	if (m_players[m_currentPlayer].anyTileOnTheBoard()) {
+		m_buttonSend.render();
+	}
+	else {
+		m_buttonPass.render();
+	}
 
 	// Representar la puntuació de cada jugador
 	string points1 = "Player 1 Score: " + to_string(m_players[0].getPlayerScore());
