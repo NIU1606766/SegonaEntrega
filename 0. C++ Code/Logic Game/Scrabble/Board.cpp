@@ -126,7 +126,7 @@ bool Board::aligned()
 		}
 		for (i = m_min + 1; i < m_max; i++)
 		{
-			if (m_cells[m_currentWord[1].getRow()][i].getEmpty() == true) //comprovem que no hi hagi cap cel·la buida entre la primera i la última
+			if (m_cells[m_currentWord[0].getRow()][i].getEmpty() == true) //comprovem que no hi hagi cap cel·la buida entre la primera i la última
 			{
 				return false;
 			}
@@ -134,8 +134,8 @@ bool Board::aligned()
 	}
 	else
 	{
-		m_min = m_currentWord[1].getRow();
-		m_max = m_currentWord[1].getRow();
+		m_min = m_currentWord[0].getRow();
+		m_max = m_currentWord[0].getRow();
 		for (i = 0; i < m_currentWord.size(); i++)
 		{
 			if (m_currentWord[i].getRow() < m_min) //seleccionem la primera casella de la paraula
@@ -187,17 +187,17 @@ bool Board::connection()
 		{
 			row = m_currentWord[i].getRow();
 			col = m_currentWord[i].getCol();
-			pos.setCol(col);
-			pos.setRow(row);
 			if (row > 0 && m_cells[row - 1][col].getTilePlayed() == true) //comprovem si la cel·la té una fitxa jugada a sobre
 			{
 				connection = true;
+				pos.setCol(col);
 				pos.setRow(row - 1);
 				m_verticalConnections.push_back(pos);
 			}
 			if (row < 14 && m_cells[row + 1][col].getTilePlayed() == true) //comprovem si la cel·la té una fitxa jugada a sota
 			{
 				connection = true;
+				pos.setCol(col);
 				pos.setRow(row + 1);
 				m_verticalConnections.push_back(pos);
 			}
@@ -205,12 +205,14 @@ bool Board::connection()
 			{
 				connection = true;
 				pos.setCol(col - 1);
+				pos.setRow(row);
 				m_horizontalConnections.push_back(pos);
 			}
 			if (col < 14 && m_cells[row][col + 1].getTilePlayed() == true) //comprovem si la cel·la té una fitxa jugada a la dreta
 			{
 				connection = true;
 				pos.setCol(col + 1);
+				pos.setRow(row);
 				m_horizontalConnections.push_back(pos);
 			}
 		}
