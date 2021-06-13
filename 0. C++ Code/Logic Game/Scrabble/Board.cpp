@@ -493,7 +493,7 @@ void Board::removeCurrentWord()
 
 Cell Board::getCell(int row, int col)
 {
-	return m_cells[col][row];
+	return m_cells[row][col];
 }
 
 void Board::render()

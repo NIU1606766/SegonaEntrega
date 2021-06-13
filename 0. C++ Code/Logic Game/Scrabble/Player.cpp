@@ -123,13 +123,12 @@ void Player::addTiles(LettersBag& lb)
 		}
 }
 
-void Player::sendCurrentWordToBoard(Board& board)
+bool Player::sendCurrentWordToBoard(Board& board)
 {
 	if (board.checkCurrentWord(m_score) == ALL_CORRECT) {
 		for (int i = 0; i < MAX_TILES; i++) { //comprovo si s'han tirat totes les fitxes (pendents de validar)
 			if (m_tiles[i].getIsOnBoard()) {
 				m_boardTiles.push_back(m_tiles[i].getTile()); //guardo la fitxa jugada per poder sobreescriure la posicio al atril al setTile
-
 
 				m_boardTilesPosition.push_back(make_pair(m_tiles[i].getPosX(), m_tiles[i].getPosY()));
 
@@ -144,8 +143,11 @@ void Player::sendCurrentWordToBoard(Board& board)
 
 		}
 		board.sendCurrentWordToBoard();
+		// to do: reomplir atril
 		m_allCorrect = true;
+		return true;
 	}
+	return false;
 }
 
 bool Player::anyTileOnTheBoard()

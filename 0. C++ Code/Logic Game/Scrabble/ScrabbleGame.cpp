@@ -58,7 +58,12 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 
 	if (send && m_players[m_currentPlayer].anyTileOnTheBoard())
 	{
-		m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
+		bool result = m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
+		if (result) {
+			// passem de jugador
+			m_currentPlayer++;
+			if (m_currentPlayer > NUM_PLAYERS) m_currentPlayer = 0;
+		}
 	}
 
 	if (shuffle)

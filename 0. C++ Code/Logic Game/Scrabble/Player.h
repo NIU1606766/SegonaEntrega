@@ -27,7 +27,7 @@ public:
 
 	
 	void addTiles(LettersBag& lb);
-	void sendCurrentWordToBoard(Board& board);
+	bool sendCurrentWordToBoard(Board& board);
 	bool anyTileOnTheBoard();
 	bool allTilesPlayed();
 	IMAGE_NAME imageSmall2(char letter);
