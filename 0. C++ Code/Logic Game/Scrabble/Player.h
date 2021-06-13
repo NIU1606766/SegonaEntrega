@@ -34,6 +34,7 @@ public:
 	void checkBoard(Board& board);
 	void recall();
 	void shuffle();
+	bool noTiles();
 
 
 private:

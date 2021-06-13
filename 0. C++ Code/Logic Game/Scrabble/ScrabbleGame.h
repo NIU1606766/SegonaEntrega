@@ -36,6 +36,8 @@ private:
     Button m_buttonShuffle;
     Button m_buttonSend;
     Button m_buttonPass;
+    int m_nPasses;
+    bool m_gameOver;
 };
 
 #endif /* ScrabbleGame_hpp */

@@ -447,7 +447,7 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 			return INVALID_WORDS_NOT_IN_DICTIONARY; //hi ha paraules que no estan al diccionari
 		}
 	}
-	points = score(); //sumem els punts d'aquest torn
+	points += score(); //sumem els punts d'aquest torn
 
 	cout << "ALL_CORRECT" << endl;
 	return ALL_CORRECT; //ha passat totes les comprovacions correctament

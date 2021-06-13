@@ -114,14 +114,19 @@ void Player::render(int mousePosX, int mousePosY, bool mouseStatus)
 
 void Player::addTiles(LettersBag& lb)
 {
-	//FALTA PRINTAR LA NOVA LLETRA EN AQUEST MÈTODE?
-
 		for (int i = 0; i < MAX_TILES; i++) {
 			if (m_tiles[i].getIsEmpty()) //la lletra ha estat jugada i validada per tant fa falta afegir una nova de la bag (o es el primer torn i totes les pos estan buides)
 			{
-				m_tiles[i].setTile(lb.getLetter()); //omplo la posició
-				m_tiles[i].setSizeSmall(false);
-				m_tiles[i].setIsEmpty(false); //dic que la posicio ja no esta buida
+				if (lb.getLettersQuantity() > 0)
+				{
+					m_tiles[i].setTile(lb.getLetter()); //omplo la posició
+					m_tiles[i].setSizeSmall(false);
+					m_tiles[i].setIsEmpty(false); //dic que la posicio ja no esta buida
+				}
+				else
+				{
+					lb.setEmpty(true);
+				}
 			}
 		}
 }
@@ -361,4 +366,16 @@ void Player::shuffle()
 	}
 	std::cout << std::endl;
 
+}
+
+bool Player::noTiles()
+{
+	for (int i = 0; i < MAX_TILES; i++)
+	{
+		if (!m_tiles[i].getIsEmpty())
+		{
+			return false;
+		}
+	}
+	return true;
 }

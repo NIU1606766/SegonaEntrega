@@ -17,7 +17,9 @@ ScrabbleGame::ScrabbleGame() : m_buttonSend(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTT
 							   m_buttonPass(IMAGE_BUTTON_PASS_NORMAL, IMAGE_BUTTON_PASS_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100),
 							   m_board(),
 							   m_currentPlayer(0),
-							   m_lettersBag()
+							   m_lettersBag(),
+							   m_nPasses(0),
+							   m_gameOver(false)
 {
 	for (int i = 0; i < NUM_PLAYERS; i++)
 	{
@@ -50,7 +52,6 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	m_players[m_currentPlayer].checkBoard(m_board);
 
 
-
 	if (m_players[m_currentPlayer].anyTileOnTheBoard()) {
 		send = m_buttonSend.update(mousePosX, mousePosY, mouseStatus);
 	} else {
@@ -65,9 +66,15 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 		if (result) {
 			// agafem fitxes
 			m_players[m_currentPlayer].addTiles(m_lettersBag);
+			if (m_players[m_currentPlayer].noTiles())
+			{
+				cout << "Game over\n"; //s'ha acabat la partida
+				m_gameOver = true;
+			}
 			// passem de jugador
 			m_currentPlayer++;
 			if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0;
+			m_nPasses = 0;
 		}
 	}
 
@@ -87,6 +94,12 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 		// passem de jugador
 		m_currentPlayer++;
 		if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0;
+		m_nPasses++;
+		if (m_nPasses > NUM_PLAYERS)
+		{
+			cout << "Game over\n"; //s'ha acabat la partida
+			m_gameOver = true;
+		}
 	}
 
 	m_buttonRecall.render();
@@ -114,4 +127,11 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	string bagLetters = "Tiles in the bag: " + to_string(m_lettersBag.getLettersQuantity());
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 550, 750, 0.6, bagLetters);
     
+	// Game over
+	string fin = "GAME OVER";
+	if (m_gameOver)
+	{
+		GraphicManager::getInstance()->drawFont(FONT_RED_30, 550, 0, 1, fin);
+	}
+
 }
