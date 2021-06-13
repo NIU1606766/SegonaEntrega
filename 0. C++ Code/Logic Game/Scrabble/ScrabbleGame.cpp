@@ -11,6 +11,7 @@
 
 using std::string;
 
+//inicialitzem totes les variables de la partida
 ScrabbleGame::ScrabbleGame() : m_buttonSend(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTTON_SEND_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100),
 							   m_buttonShuffle(IMAGE_BUTTON_SHUFFLE_NORMAL, IMAGE_BUTTON_SHUFFLE_PRESSED, 440, SCREEN_SIZE_Y - 100, 100, 100),
 							   m_buttonRecall(IMAGE_BUTTON_RECALL_NORMAL, IMAGE_BUTTON_RECALL_PRESSED, 200, SCREEN_SIZE_Y - 100, 100, 100),
@@ -30,10 +31,6 @@ ScrabbleGame::ScrabbleGame() : m_buttonSend(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTT
 			m_players[i].addTiles(m_lettersBag);
 		}
 	}
-}
-
-ScrabbleGame::~ScrabbleGame(){
-    
 }
 
 void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStatus)
@@ -60,7 +57,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	shuffle = m_buttonShuffle.update(mousePosX, mousePosY, mouseStatus);
 	recall = m_buttonRecall.update(mousePosX, mousePosY, mouseStatus);
 
-	if (send)
+	if (send && !m_gameOver)
 	{
 		bool result = m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
 		if (result) {
@@ -78,18 +75,20 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 		}
 	}
 
-	if (shuffle)
+	if (shuffle && !m_gameOver)
 	{
+		m_players[m_currentPlayer].recall();
+		m_board.removeCurrentWord();
 		m_players[m_currentPlayer].shuffle();
 	}
 
-	if(recall)
+	if(recall && !m_gameOver)
 	{
 		m_players[m_currentPlayer].recall();
 		m_board.removeCurrentWord();
 	}
 
-	if (pass)
+	if (pass && !m_gameOver)
 	{
 		// passem de jugador
 		m_currentPlayer++;

@@ -22,7 +22,6 @@ class ScrabbleGame
 {
 public:
     ScrabbleGame();
-    ~ScrabbleGame();
     
     void updateAndRender    (int mousePosX, int mousePosY,bool mouseStatus);
     
