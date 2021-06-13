@@ -252,17 +252,3 @@ IMAGE_NAME PlayerTile::imageSmall(char letter)
 		break;
 	}
 }
-
-PlayerTile PlayerTile::operator=(const PlayerTile& pt)
-{
-	PlayerTile aux;
-	aux.m_tile = pt.m_tile;
-	aux.m_isEmpty = pt.m_isEmpty;
-	aux.m_posX = pt.m_posX;
-	aux.m_posY = pt.m_posY;
-	aux.m_isOnBoard = pt.m_isOnBoard;
-	aux.m_boardPosition = pt.m_boardPosition;
-	aux.m_sizeSmall = pt.m_sizeSmall;
-
-	return aux;
-}

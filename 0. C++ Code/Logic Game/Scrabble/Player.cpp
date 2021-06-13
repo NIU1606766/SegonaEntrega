@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "../GraphicManager.h"
 #include <iostream>
+#include <algorithm>
 #include <stdlib.h>
 
 void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board)
@@ -343,10 +344,10 @@ void Player::shuffle()
 
 		int pos = rand() % MAX_TILES;
 
-		while (!m_tiles[pos].getIsOnBoard() && m_tiles[pos].getPosY() == PLAYER_TILE_POS_Y && pos == i)
-			pos = rand() % MAX_TILES;
+		//while (!m_tiles[pos].getIsOnBoard() && m_tiles[pos].getPosY() == PLAYER_TILE_POS_Y && pos == i)
+		//	pos = rand() % MAX_TILES;
 
-		if (!m_tiles[i].getIsOnBoard() && m_tiles[i].getPosY() == PLAYER_TILE_POS_Y)
+		if (!m_tiles[i].getIsOnBoard() && !m_tiles[pos].getIsOnBoard())
 		{
 			aux = m_tiles[i];
 			m_tiles[i] = m_tiles[pos];

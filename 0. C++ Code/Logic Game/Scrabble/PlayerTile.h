@@ -12,7 +12,7 @@ public:
 	// Constructor i Deconstructor
 	PlayerTile();
 	PlayerTile(Tile& tile) { m_tile = tile; m_isEmpty = true; m_isOnBoard = false; }
-	~PlayerTile() {}
+	//~PlayerTile() {}
 
 	// Setters
 	void setTile(const Tile& tile) { m_tile = tile; }
@@ -39,10 +39,8 @@ public:
 	IMAGE_NAME imageBig(char letter);
 	IMAGE_NAME imageSmall(char letter);
 
-	PlayerTile operator=(const PlayerTile& pt);
-
-	const int bigTileSize = 100;
-	const int smallTileSize = 40;
+	static const int bigTileSize = 100;
+	static const int smallTileSize = 40;
 
 private:
 	Tile m_tile;
