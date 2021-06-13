@@ -19,6 +19,7 @@ public:
 	~LettersBag() {}
 
 	// Getters and setters
+	int getLettersQuantity() { return m_letters.size(); }
 	Tile getLetter();
 	bool getEmpty() const { return m_empty; }
 	void setEmpty(const bool& isEmpty) { m_empty = isEmpty; }

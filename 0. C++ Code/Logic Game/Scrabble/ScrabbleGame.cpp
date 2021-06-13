@@ -106,6 +106,12 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 6, 775, 0.6, points2);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 6, 800, 0.6, points3);
 
+	// Representar de qui és el torn actual
+	string turn = "Player turn: " + to_string(m_currentPlayer + 1);
+	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 6, 5, 0.6, turn);
 
+	// Representar les fitxes que queden a la bossa
+	string bagLetters = "Tiles in the bag: " + to_string(m_lettersBag.getLettersQuantity());
+	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 550, 750, 0.6, bagLetters);
     
 }
