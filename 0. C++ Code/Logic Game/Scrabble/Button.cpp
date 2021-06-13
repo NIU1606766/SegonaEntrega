@@ -26,7 +26,7 @@ Button::~Button()
 bool Button::update (int mousePosX, int mousePosY, bool mouseIsPressed) 
 {
     bool doAction = false;
-	if (mouseIsPressed && mousePosX >= m_iPosX && mousePosY >= m_iPosY && mousePosX <= m_iPosX + m_iWidth && mousePosY <= m_iPosY + m_iHeight)
+	if (mousePosX >= m_iPosX && mousePosY >= m_iPosY && mousePosX <= m_iPosX + m_iWidth && mousePosY <= m_iPosY + m_iHeight)
     {
         if (mouseIsPressed && m_eCurrentState == NORMAL)
         {

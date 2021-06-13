@@ -411,20 +411,24 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 	m_verticalConnections.clear();
 	if (aligned() == false)
 	{
+		cout << "INVALID_NOT_ALIGNED" << endl;
 		return INVALID_NOT_ALIGNED; //no estan alineades o consecutives
 	}
 	if (m_cells[7][7].getTilePlayed() == false) //les següents comprovacions s'efectuen només el primer torn de la partida
 	{
 		if (startInCenter() == false)
 		{
+			cout << "INVALID_START_NOT_IN_CENTER" << endl;
 			return INVALID_START_NOT_IN_CENTER; //no s'ha començat al centre
 		}
 		if (moreThanOneLetter() == false)
 		{
+			cout << "INVALID_WORD_OF_ONE_LETTER" << endl;
 			return INVALID_WORD_OF_ONE_LETTER; //la paraula és d'una sola lletra
 		}
 		if (wordInDictionary() == false)
 		{
+			cout << "INVALID_WORDS_NOT_IN_DICTIONARY" << endl;
 			return INVALID_WORDS_NOT_IN_DICTIONARY; //la paraula no està al diccionari
 		}
 	}
@@ -432,15 +436,18 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 	{
 		if (connection() == false)
 		{
+			cout << "INVALID_NOT_CONNECTION" << endl;
 			return INVALID_NOT_CONNECTION; //la paraula no està connectada a cap fitxa de trons anteriors
 		}
 		if (wordsInDictionary() == false)
 		{
+			cout << "INVALID_WORDS_NOT_IN_DICTIONARY" << endl;
 			return INVALID_WORDS_NOT_IN_DICTIONARY; //hi ha paraules que no estan al diccionari
 		}
 	}
 	points = score(); //sumem els punts d'aquest torn
 
+	cout << "ALL_CORRECT" << endl;
 	return ALL_CORRECT; //ha passat totes les comprovacions correctament
 }
 
