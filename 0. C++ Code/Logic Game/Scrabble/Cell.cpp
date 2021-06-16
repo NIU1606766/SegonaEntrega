@@ -9,9 +9,9 @@
 
 void Cell::render(int posX, int posY)
 {
-	if (this->getEmpty() != true) 
+	if (this->getEmpty() != true) // Només dibuixem la fitxa si hi és
 	{
-		switch (this->getTile().getLetter())
+		switch (this->getTile().getLetter()) // Dibuixem la lletra que trobem amb el mètode getLetter
 		{
 			case 'a':
 				GraphicManager::getInstance()->drawSprite(IMAGE_LETTER_A_SMALL, posX, posY);

@@ -11,7 +11,7 @@
 
 using std::string;
 
-//inicialitzem totes les variables de la partida
+// Inicialitzem totes les variables de la partida
 ScrabbleGame::ScrabbleGame() : m_buttonSend(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTTON_SEND_PRESSED, SCREEN_SIZE_X * 0.5 - 139 * 0.5, SCREEN_SIZE_Y - 100, 139, 100),
 							   m_buttonShuffle(IMAGE_BUTTON_SHUFFLE_NORMAL, IMAGE_BUTTON_SHUFFLE_PRESSED, 440, SCREEN_SIZE_Y - 100, 100, 100),
 							   m_buttonRecall(IMAGE_BUTTON_RECALL_NORMAL, IMAGE_BUTTON_RECALL_PRESSED, 200, SCREEN_SIZE_Y - 100, 100, 100),
@@ -28,7 +28,7 @@ ScrabbleGame::ScrabbleGame() : m_buttonSend(IMAGE_BUTTON_SEND_NORMAL, IMAGE_BUTT
 
 		for (int j = 0; j < MAX_TILES; j++)
 		{
-			m_players[i].addTiles(m_lettersBag);
+			m_players[i].addTiles(m_lettersBag); // Donem les primeres fitxes a cada jugador
 		}
 	}
 }
@@ -39,36 +39,34 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	bool shuffle = false;
 	bool recall = false;
 	bool pass = false;
-	GraphicManager::getInstance()->drawSprite(IMAGE_BACKGROUND, 0, 0);
+	GraphicManager::getInstance()->drawSprite(IMAGE_BACKGROUND, 0, 0); // Dibuixem el fons i el tauler
 	m_board.render();
+
+	// Comencem els updates de player i els botons, i el checkBoard
 	m_players[m_currentPlayer].update(mousePosX, mousePosY, mouseStatus, m_board);
-
-	//if (m_players[m_currentPlayer].anyTileOnTheBoard())
-	//	m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
-
 	m_players[m_currentPlayer].checkBoard(m_board);
 
 
 	if (m_players[m_currentPlayer].anyTileOnTheBoard()) {
 		send = m_buttonSend.update(mousePosX, mousePosY, mouseStatus);
 	} else {
-		pass = m_buttonPass.update(mousePosX, mousePosY, mouseStatus);
+		pass = m_buttonPass.update(mousePosX, mousePosY, mouseStatus); // Si no s'ha posat cap fitxa enlloc de send apareix el botó pass
 	}
 	shuffle = m_buttonShuffle.update(mousePosX, mousePosY, mouseStatus);
 	recall = m_buttonRecall.update(mousePosX, mousePosY, mouseStatus);
 
-	if (send && !m_gameOver)
+	if (send && !m_gameOver) // Quan s'ha acabat la partida, els botons deixen de funcionar
 	{
-		bool result = m_players[m_currentPlayer].sendCurrentWordToBoard(m_board);
+		bool result = m_players[m_currentPlayer].sendCurrentWordToBoard(m_board); // Executem el send amb el mètode "sendCurrentWordToBoard" de la classe Player (no confondre amb el de la classe Board)
 		if (result) {
-			// agafem fitxes
+			// Agafem fitxes
 			m_players[m_currentPlayer].addTiles(m_lettersBag);
-			if (m_players[m_currentPlayer].noTiles())
+			if (m_players[m_currentPlayer].noTiles()) // Si un jugador no té fitxes i no n'ha pogut agafar de la bossa
 			{
-				cout << "Game over\n"; //s'ha acabat la partida
+				// S'ha acabat la partida
 				m_gameOver = true;
 			}
-			// passem de jugador
+			// Passem de jugador
 			m_currentPlayer++;
 			if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0;
 			m_nPasses = 0;
@@ -77,7 +75,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 
 	if (shuffle && !m_gameOver)
 	{
-		m_players[m_currentPlayer].recall();
+		m_players[m_currentPlayer].recall(); // Abans de barrejar les fitxes les tornem a la mà del jugador amb el mètode recall
 		m_board.removeCurrentWord();
 		m_players[m_currentPlayer].shuffle();
 	}
@@ -90,23 +88,26 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 
 	if (pass && !m_gameOver)
 	{
-		// passem de jugador
+		// Passem de jugador
 		m_currentPlayer++;
-		if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0;
+		if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0; // Per anar rotant de jugadors, quan arribem al final de l'array de jugadors tornem al principi
 		m_nPasses++;
-		if (m_nPasses > NUM_PLAYERS)
+		if (m_nPasses > NUM_PLAYERS) // Per comprovar que cap jugador pugui tirar, esperem a que tots ells apretin el botó pass
 		{
-			cout << "Game over\n"; //s'ha acabat la partida
+			cout << "Game over\n"; // S'ha acabat la partida
 			m_gameOver = true;
 		}
 	}
 
+	// Fem el render dels botons
 	m_buttonRecall.render();
 	m_buttonShuffle.render();
-	if (m_players[m_currentPlayer].anyTileOnTheBoard()) {
+	if (m_players[m_currentPlayer].anyTileOnTheBoard())
+	{
 		m_buttonSend.render();
 	}
-	else {
+	else // Si no s'ha posat cap fitxa, apareix el botó pass enlloc del send
+	{
 		m_buttonPass.render();
 	}
 

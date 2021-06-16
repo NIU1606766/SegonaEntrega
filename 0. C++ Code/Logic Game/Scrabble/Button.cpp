@@ -26,15 +26,15 @@ Button::~Button()
 bool Button::update (int mousePosX, int mousePosY, bool mouseIsPressed) 
 {
     bool doAction = false;
-	if (mousePosX >= m_iPosX && mousePosY >= m_iPosY && mousePosX <= m_iPosX + m_iWidth && mousePosY <= m_iPosY + m_iHeight)
+	if (mousePosX >= m_iPosX && mousePosY >= m_iPosY && mousePosX <= m_iPosX + m_iWidth && mousePosY <= m_iPosY + m_iHeight) // Comprovem que el mouse està dins el botó
     {
-        if (mouseIsPressed && m_eCurrentState == NORMAL)
+        if (mouseIsPressed && m_eCurrentState == NORMAL) // Hem apretat el botó
         {
-            m_eCurrentState = PRESSED; // Hem entrat amb el mouse apretant i per tant no cal fer res.
+            m_eCurrentState = PRESSED; // Quan apretem el botó encara no activem l'acció
         }
-        else if (!mouseIsPressed && m_eCurrentState == PRESSED)
+        else if (!mouseIsPressed && m_eCurrentState == PRESSED) // Hem deixat d'apretar
         {
-            doAction = true;
+            doAction = true; // Quan el deixem anar sí que l'activem
             m_eCurrentState = NORMAL;
         }
     }
@@ -50,11 +50,11 @@ void Button::render ()
 {
     if (m_eCurrentState == PRESSED)
     {
-        GraphicManager::getInstance()->drawSprite(m_eStatePressed, m_iPosX, m_iPosY);
+        GraphicManager::getInstance()->drawSprite(m_eStatePressed, m_iPosX, m_iPosY); // Si està apretat el dibuixem apretat
     }
     else
     {
-        GraphicManager::getInstance()->drawSprite(m_eStateNormal, m_iPosX, m_iPosY);
+        GraphicManager::getInstance()->drawSprite(m_eStateNormal, m_iPosX, m_iPosY); // Si no ho està el dibuixem normal
     }
 }
 

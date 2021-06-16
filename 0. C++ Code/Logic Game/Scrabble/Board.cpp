@@ -500,7 +500,7 @@ Cell Board::getCell(int row, int col)
 
 void Board::render()
 {
-	GraphicManager::getInstance()->drawSprite(IMAGE_BOARD, BOARD_POS_X, BOARD_POS_Y);
+	GraphicManager::getInstance()->drawSprite(IMAGE_BOARD, BOARD_POS_X, BOARD_POS_Y); // Dibuixem el tauler
 	int posX = BOARD_POS_X;
 	int posY = BOARD_POS_Y;
 
@@ -508,7 +508,7 @@ void Board::render()
 	{
 		for (int j = 0; j < BOARD_COLS_AND_ROWS; j++)
 		{
-			m_cells[i][j].render(posX, posY);
+			m_cells[i][j].render(posX, posY); //Recorrem el tauler dibuixant cada cel·la a la seva posició
 			posX += BOARD_TILE_SIZE;
 		}
 		posY += BOARD_TILE_SIZE;
