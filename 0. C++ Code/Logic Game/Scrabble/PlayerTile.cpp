@@ -12,7 +12,7 @@ PlayerTile::PlayerTile()
 	m_sizeSmall = false;
 }
 
-void PlayerTile::printLetter()
+void PlayerTile::renderPlayerTile()
 {
 	// Si la lletra no està al board i no està en petita:
 	if (!m_isOnBoard && !m_sizeSmall)

@@ -33,7 +33,7 @@ public:
 	
 
 	//Mètodes de la part gràfica
-	void printLetter();
+	void renderPlayerTile();
 	
 	IMAGE_NAME imageBig(char letter);
 	IMAGE_NAME imageSmall(char letter);

@@ -56,7 +56,7 @@ void Player::update(int mousePosX, int mousePosY, bool mouseStatus, Board& board
 	{
 		// Recorrem totes les tiles del jugador i les renderitzem a pantalla.
 		if (!m_tiles[i].getIsEmpty()) {
-			m_tiles[i].printLetter();
+			m_tiles[i].renderPlayerTile();
 		}
 		j += 105;
 	}
