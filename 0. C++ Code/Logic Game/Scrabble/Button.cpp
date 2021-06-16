@@ -8,6 +8,7 @@ Button::Button(IMAGE_NAME state_normal,
                int posX, int posY,
                int width, int height)
 {
+    // Assignem cada atribut a un valor per defecte.
     m_eCurrentState = NORMAL;
     m_iPosX = posX;
     m_iPosY = posY;
