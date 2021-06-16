@@ -26,14 +26,15 @@ public:
 	void render(int mousePosX, int mousePosY, bool mouseStatus);
 
 	
+	// Altres funcions necessàries per la funció Update del Player.
+	void recall();
+	void shuffle();
 	void addTiles(LettersBag& lb);
 	bool sendCurrentWordToBoard(Board& board);
 	bool anyTileOnTheBoard();
 	bool allTilesPlayed();
 	IMAGE_NAME imageSmall2(char letter);
 	void checkBoard(Board& board);
-	void recall();
-	void shuffle();
 	bool noTiles();
 
 
@@ -44,9 +45,9 @@ private:
 	bool m_isDragging;
 	bool m_allCorrect;
 
-	vector <pair<float, float>> m_boardTilesPosition;
-	vector <Tile> m_boardTiles;
-	vector <pair<Tile, BoardPosition>> m_setTiles;
+	vector <pair<Tile, BoardPosition>> m_setTiles; // --> vector de pair, que serveix per guardar quines tiles s'han jugat en el torn i la seva posició al tauler.
+	vector <pair<float, float>> m_boardTilesPosition; // --> vector de pair, que guarda la posició de les tiles que estan al board.
+	vector <Tile> m_boardTiles; // --> vector de tiles que guarda quines tiles queden al board.
 };
 
 #endif /* Player_hpp */
