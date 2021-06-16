@@ -3,6 +3,7 @@
 
 PlayerTile::PlayerTile()
 {
+	// Assigna els atributs als valors per defecte que toquen.
 	Tile tile;
 
 	m_tile = tile;
@@ -13,22 +14,24 @@ PlayerTile::PlayerTile()
 
 void PlayerTile::printLetter()
 {
-	// Lletra per escollir (Gran)
+	// Si la lletra no està al board i no està en petita:
 	if (!m_isOnBoard && !m_sizeSmall)
 	{
+		// Creem un imagename amb el imagename de la lletra en big i després la renderitzem on toqui.
 		IMAGE_NAME i = imageBig(m_tile.getLetter());
-		GraphicManager::getInstance()->drawSprite((IMAGE_NAME)i, m_posX, m_posY);
+		GraphicManager::getInstance()->drawSprite(i, m_posX, m_posY);
 	}
-	// Lletra clicada o al taulell
+	// En canvi, si està al tauler o ja estava petita, la hem de dibuixar en petit.
 	else if (m_isOnBoard || m_sizeSmall)
 	{
 		IMAGE_NAME i = imageSmall(m_tile.getLetter());
-		GraphicManager::getInstance()->drawSprite((IMAGE_NAME)i, m_posX, m_posY);
+		GraphicManager::getInstance()->drawSprite(i, m_posX, m_posY);
 	}
 }
 
 IMAGE_NAME PlayerTile::imageBig(char letter)
 {
+	// Retornem un IMAGE_LETTER_BIG de la letter que ens passen per paràmetre.
 	switch (letter)
 	{
 	case 'a':
@@ -142,6 +145,7 @@ IMAGE_NAME PlayerTile::imageBig(char letter)
 
 IMAGE_NAME PlayerTile::imageSmall(char letter)
 {
+	// Retornem un IMAGE_LETTER_SMALL de la letter que ens passin per paràmetre.
 	switch (letter)
 	{
 	case 'a':
