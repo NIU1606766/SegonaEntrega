@@ -136,7 +136,7 @@ void Player::addTiles(LettersBag& lb)
 			if (m_tiles[i].getIsEmpty())
 			{
 				// Mentre la LetterBag segueixi tenint fitxes, omplim la posició buida amb una nova d'aquesta.
-				if (lb.getLettersQuantity() > 0)
+				if (lb.getLettersBagSize() > 0)
 				{
 					m_tiles[i].setTile(lb.getLetter());
 					m_tiles[i].setSizeSmall(false);
@@ -178,7 +178,7 @@ bool Player::sendCurrentWordToBoard(Board& board)
 	return false;
 }
 
-bool Player::anyTileOnTheBoard()
+bool Player::tilesOnBoard()
 {
 	bool boardTile = false;
 
@@ -196,22 +196,22 @@ bool Player::anyTileOnTheBoard()
 	return boardTile;
 }
 
-bool Player::allTilesPlayed()
+bool Player::everyTilePlayed()
 {
-	bool allTilesPlayed = true;
+	bool everyTilePlayed = true;
 
 	// Fem un for per recorrer totes les tiles del jugador i comprovar si estan al tauler o no.
 	for (int i = 0; i < MAX_TILES; i++)
 	{
-		// Si n'hi ha alguna que no estigui al tauler, voldrà dir que no s'han jugat totes, i per tant, allTilesPlayed = false.
+		// Si n'hi ha alguna que no estigui al tauler, voldrà dir que no s'han jugat totes, i per tant, everyTilePlayed = false.
 		if (!m_tiles[i].getIsOnBoard())
-			allTilesPlayed = false;
+			everyTilePlayed = false;
 	}
 
-	return allTilesPlayed;
+	return everyTilePlayed;
 }
 
-IMAGE_NAME Player::imageSmall2(char letter)
+IMAGE_NAME Player::imageSmall(char letter)
 {
 	// Aquesta funció el que fa és retornar l'imagename corresponent a la lletra que li passem per paràmetre, en petit.
 	switch (letter)
@@ -331,7 +331,7 @@ void Player::checkBoard(Board& board)
 	for (int i = 0; i < m_boardTiles.size(); i++)
 	{
 		// Posem la imatge petita de la lletra que li toqui, i la renderitzem a les posicions que li toquen.
-		IMAGE_NAME img = imageSmall2(m_boardTiles[i].getLetter());
+		IMAGE_NAME img = imageSmall(m_boardTiles[i].getLetter());
 		float posX = m_boardTilesPosition[i].first;
 		float posY = m_boardTilesPosition[i].second;
 		GraphicManager::getInstance()->drawSprite((IMAGE_NAME)img, posX, posY);

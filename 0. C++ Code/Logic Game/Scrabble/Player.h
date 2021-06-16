@@ -27,15 +27,15 @@ public:
 
 	
 	// Altres funcions necessàries per la funció Update del Player.
-	void recall();
 	void shuffle();
+	void recall();
 	void addTiles(LettersBag& lb);
 	bool sendCurrentWordToBoard(Board& board);
-	bool anyTileOnTheBoard();
-	bool allTilesPlayed();
-	IMAGE_NAME imageSmall2(char letter);
 	void checkBoard(Board& board);
+	IMAGE_NAME imageSmall(char letter);
+	bool everyTilePlayed();
 	bool noTiles();
+	bool tilesOnBoard();
 
 
 private:

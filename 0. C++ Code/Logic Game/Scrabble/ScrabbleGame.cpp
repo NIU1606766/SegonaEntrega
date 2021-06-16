@@ -47,7 +47,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	m_players[m_currentPlayer].checkBoard(m_board);
 
 
-	if (m_players[m_currentPlayer].anyTileOnTheBoard()) {
+	if (m_players[m_currentPlayer].tilesOnBoard()) {
 		send = m_buttonSend.update(mousePosX, mousePosY, mouseStatus);
 	} else {
 		pass = m_buttonPass.update(mousePosX, mousePosY, mouseStatus); // Si no s'ha posat cap fitxa enlloc de send apareix el botó pass
@@ -55,6 +55,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	shuffle = m_buttonShuffle.update(mousePosX, mousePosY, mouseStatus);
 	recall = m_buttonRecall.update(mousePosX, mousePosY, mouseStatus);
 
+	// Si s'ha clicat el botó send:
 	if (send && !m_gameOver) // Quan s'ha acabat la partida, els botons deixen de funcionar
 	{
 		bool result = m_players[m_currentPlayer].sendCurrentWordToBoard(m_board); // Executem el send amb el mètode "sendCurrentWordToBoard" de la classe Player (no confondre amb el de la classe Board)
@@ -73,6 +74,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 		}
 	}
 
+	// Si s'ha clicat el botó shuffle:
 	if (shuffle && !m_gameOver)
 	{
 		m_players[m_currentPlayer].recall(); // Abans de barrejar les fitxes les tornem a la mà del jugador amb el mètode recall
@@ -80,19 +82,21 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 		m_players[m_currentPlayer].shuffle();
 	}
 
+	// Si s'ha clicat el botó recall:
 	if(recall && !m_gameOver)
 	{
 		m_players[m_currentPlayer].recall();
 		m_board.removeCurrentWord();
 	}
 
+	// Si s'ha clicat el botó de pass:
 	if (pass && !m_gameOver)
 	{
 		// Passem de jugador
 		m_currentPlayer++;
 		if (m_currentPlayer >= NUM_PLAYERS) m_currentPlayer = 0; // Per anar rotant de jugadors, quan arribem al final de l'array de jugadors tornem al principi
 		m_nPasses++;
-		if (m_nPasses > NUM_PLAYERS) // Per comprovar que cap jugador pugui tirar, esperem a que tots ells apretin el botó pass
+		if (m_nPasses == NUM_PLAYERS) // Per comprovar que cap jugador pugui tirar, esperem a que tots ells apretin el botó pass
 		{
 			cout << "Game over\n"; // S'ha acabat la partida
 			m_gameOver = true;
@@ -102,7 +106,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	// Fem el render dels botons
 	m_buttonRecall.render();
 	m_buttonShuffle.render();
-	if (m_players[m_currentPlayer].anyTileOnTheBoard())
+	if (m_players[m_currentPlayer].tilesOnBoard())
 	{
 		m_buttonSend.render();
 	}
@@ -124,7 +128,7 @@ void ScrabbleGame::updateAndRender (int mousePosX, int mousePosY, bool mouseStat
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 6, 5, 0.6, turn);
 
 	// Representar les fitxes que queden a la bossa
-	string bagLetters = "Tiles in the bag: " + to_string(m_lettersBag.getLettersQuantity());
+	string bagLetters = "Tiles in the bag: " + to_string(m_lettersBag.getLettersBagSize());
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 550, 750, 0.6, bagLetters);
     
 	// Game over
